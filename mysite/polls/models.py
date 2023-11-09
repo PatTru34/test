@@ -9,6 +9,11 @@ SHIRT_SIZES = (
     ('L', 'Large'),
 )
 
+PLEC = (
+    ('M', 'Mezczyzna'),
+    ('K', 'Kobieta'),
+    ('I', 'Inne'),
+)
 
 class Team(models.Model):
     name = models.CharField(max_length=60)
@@ -34,11 +39,11 @@ class Stanowisko(models.Model):
 
 
 class Osoba(models.Model):
-    PLEC = (
-        ('M', 'Mezczyzna'),
-        ('K', 'Kobieta'),
-        ('I', 'Inne'),
-    )
+    # PLEC = (
+    #     ('M', 'Mezczyzna'),
+    #     ('K', 'Kobieta'),
+    #     ('I', 'Inne'),
+    # )
     imie = models.CharField(max_length=60, null=False, blank=False)
     nazwisko = models.CharField(max_length=60, null=False, blank=False)
     plec = models.CharField(max_length=1, choices=PLEC)
