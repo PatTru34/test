@@ -44,6 +44,7 @@ class Osoba(models.Model):
     #     ('K', 'Kobieta'),
     #     ('I', 'Inne'),
     # )
+
     imie = models.CharField(max_length=60, null=False, blank=False)
     nazwisko = models.CharField(max_length=60, null=False, blank=False)
     plec = models.CharField(max_length=1, choices=PLEC)
