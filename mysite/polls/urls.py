@@ -9,4 +9,5 @@ urlpatterns = [
     path('stanowiska/', views.stanowisko_list),
     path('stanowiska/<int:pk>', views.stanowisko_detail),
 
+
 ]

@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .models import Person, Team, Osoba, Stanowisko
 from .serializers import PersonSerializer, OsobaSerializer,StanowiskoModelSerializer
 # określamy dostępne metody żądania dla tego endpointu
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def osoba_list(request):
     """
     Lista wszystkich obiektów modelu Osoba.
@@ -16,6 +20,8 @@ def osoba_list(request):
         return Response(serializer.data)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAdminUser])
 def osoba_detail(request, pk):
 
     try:
@@ -42,6 +48,8 @@ def osoba_detail(request, pk):
         osoba.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def osoba_list_by_name(request, imie):
 
     if request.method == 'GET':
@@ -50,6 +58,8 @@ def osoba_list_by_name(request, imie):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def stanowisko_list(request):
     """
     Lista wszystkich obiektów modelu Osoba.
@@ -60,6 +70,8 @@ def stanowisko_list(request):
         return Response(serializer.data)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAdminUser])
 def stanowisko_detail(request, pk):
 
     try:
